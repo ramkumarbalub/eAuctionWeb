@@ -1,0 +1,155 @@
+<p>place-bid works!</p>
+
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Product Name</label>
+        <div class="col-sm-2">
+            <select class="select-option"
+            #productSelect
+            (change)='onOptionsSelected(productSelect.value)'>
+                <!--<option>Choose Product</option>-->
+                <option class='produc' *ngFor="let produc of productListArray" [value]="produc.productId">{{produc.productname}}</option>
+            </select>
+        </div>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Product ID</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="productid" class="form-control" name="productid" placeholder="Enter First name" 
+              [ngClass]="{ 'is-invalid': submitted && f['productid'].errors }" />
+              <div *ngIf="submitted && f['productid'].errors" class="invalid-feedback">
+                <div *ngIf="f['productid'].errors['required']">
+                    productid1 is required
+                </div>
+      
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="firstname" class="form-control" name="firstname" placeholder="Enter First name" 
+              [ngClass]="{ 'is-invalid': submitted && f['firstname'].errors }" />
+              <div *ngIf="submitted && f['firstname'].errors" class="invalid-feedback">
+                <div *ngIf="f['firstname'].errors['required']">
+                      First name is required
+                </div>
+      
+              </div>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="lastname" class="form-control" name="lastname" placeholder="Enter Last name" 
+              [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" />
+              <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
+                <div *ngIf="f['lastname'].errors['required']">
+                      Last name is required
+                </div>
+      
+              </div>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="address" class="form-control" name="address" placeholder="Enter Address" 
+              [ngClass]="{ 'is-invalid': submitted && f['address'].errors }" />
+              <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                <div *ngIf="f['address'].errors['required']">
+                      Address is required
+                </div>      
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="city" class="form-control" name="city" placeholder="Enter city" 
+              [ngClass]="{ 'is-invalid': submitted && f['city'].errors }" />
+              <div *ngIf="submitted && f['city'].errors" class="invalid-feedback">
+                <div *ngIf="f['city'].errors['required']">
+                      City is required
+                </div>      
+              </div>
+            </div>
+        </div>
+          
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">State</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="state" class="form-control" name="state" placeholder="Enter state" 
+              [ngClass]="{ 'is-invalid': submitted && f['state'].errors }" />
+              <div *ngIf="submitted && f['state'].errors" class="invalid-feedback">
+                <div *ngIf="f['state'].errors['required']">
+                      State is required
+                </div>      
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Pin</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="pin" class="form-control" name="pin" placeholder="Enter pincode" 
+              [ngClass]="{ 'is-invalid': submitted && f['pin'].errors }" />
+              <div *ngIf="submitted && f['pin'].errors" class="invalid-feedback">
+                <div *ngIf="f['pin'].errors['required']">
+                      PinCode is required
+                </div>      
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="phone" class="form-control" name="phone" placeholder="Enter phone number" 
+              [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }" />
+              <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                <div *ngIf="f['phone'].errors['required']">
+                    Phone is required
+                </div>      
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="email" class="form-control" name="email" placeholder="Enter Email" 
+              [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+              <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                <div *ngIf="f['email'].errors['required']">
+                    Email is required
+                </div>      
+              </div>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Bid Amount</label>
+            <div class="col-sm-2">
+              <input type="text" formControlName="bidamount" class="form-control" name="bidamount" placeholder="Enter Bid Amount" 
+              [ngClass]="{ 'is-invalid': submitted && f['bidamount'].errors }" />
+              <div *ngIf="submitted && f['bidamount'].errors" class="invalid-feedback">
+                <div *ngIf="f['bidamount'].errors['required']">
+                    Bid Amount is required
+                </div>      
+              </div>
+            </div>
+        </div>
+          
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary">Clear</button>
+          </div>
+      </form>
+

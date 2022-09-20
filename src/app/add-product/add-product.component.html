@@ -1,0 +1,87 @@
+<h1>Add Product</h1>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" >
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label">Product Name</label>
+      <div class="col-sm-2">
+        <input type="text" formControlName="productname" class="form-control" name="Name" placeholder="Enter Product name" 
+        [ngClass]="{ 'is-invalid': submitted && f['productname'].errors }" />
+        <div *ngIf="submitted && f['productname'].errors" class="invalid-feedback">
+          <div *ngIf="f['productname'].errors['required']">
+                Product name is required
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="shortDesclbl" class="col-sm-2 col-form-label">Short Description</label>
+      <div class="col-sm-2">
+        <input type="text" formControlName="shortdescription" class="form-control" name="shortDesc" placeholder="Enter Short Description" 
+        [ngClass]="{ 'is-invalid': submitted && f['shortdescription'].errors }" />
+        <div *ngIf="submitted && f['shortdescription'].errors" class="invalid-feedback">
+          <div *ngIf="f['shortdescription'].errors['required']">
+            Short-description is required
+      </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="detailedDesclbl" class="col-sm-2 col-form-label">Detailed Description</label>
+      <div class="col-sm-2">
+        <input type="text" formControlName="detaileddescription" class="form-control" name="detailedDesc" placeholder="Enter Detailed Description"
+        [ngClass]="{ 'is-invalid': submitted && f['detaileddescription'].errors }" />
+        <div *ngIf="submitted && f['detaileddescription'].errors" class="invalid-feedback">
+          <div *ngIf="f['detaileddescription'].errors['required']">
+            Detailed-description is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="categorylbl" class="col-sm-2 col-form-label">Category</label>
+      <div class="col-sm-2">
+        <!-- <input type="text" class="form-control" name="categoryDesc" placeholder="Enter Category" />-->
+        <select class="form-control" formControlName="category"
+        [ngClass]="{ 'is-invalid': submitted && f['category'].errors }">
+          <option>Choose Category</option>
+          <option *ngFor="let categor of categoryList">{{categor}}</option>
+        </select>
+        <div *ngIf="submitted && f['category'].errors" class="invalid-feedback">
+          <div *ngIf="f['category'].errors['required']">
+            Category is required  
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="startingPricelbl" class="col-sm-2 col-form-label">Starting Price</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" name="startingprice" placeholder="Enter Starting Price" 
+        (keypress)="keypress($event)" formControlName="startingprice" [ngClass]="{ 'is-invalid': submitted && f['startingprice'].errors }" />
+        <div *ngIf="submitted && f['startingprice'].errors" class="invalid-feedback">
+          <div *ngIf="f['startingprice'].errors['required']">Starting Price is required</div>
+         <!-- <div *ngIf="f.startingprice.errors.pattern || f.startingprice.errors.maxlength || f.startingprice.errors.minlength">Starting Bid Price must be less than 10 digits</div>-->
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="bidEndDatelbl" class="col-sm-2 col-form-label">Bid EndDate</label>
+      <div class="col-sm-2">
+        <input type="text" class="form-control" name="bidenddate" placeholder="Enter Bid EndDate"
+        formControlName="bidenddate" />
+        
+       <!-- <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+       -->
+      
+      </div>
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary">Clear</button>
+  </div>
+   
+  </form>
