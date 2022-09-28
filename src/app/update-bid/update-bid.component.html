@@ -1,1 +1,63 @@
 <p>update-bid works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">    
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Product Name</label>
+        <div class="col-sm-2">
+            <select class="select-option"
+            #productSelect
+            (change)='onOptionsSelected(productSelect.value)'>
+                <!--<option>Choose Product</option>-->
+                <option class='produc' *ngFor="let produc of productListArray" [value]="produc.productId">{{produc.productname}}</option>
+            </select>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Product Id</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" formControlName="productId" name="productId" [value]="buyerInfo.productid" />
+        </div>
+      </div>
+      <!--
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" formControlName="firstname" name="firstname" [value]="buyerInfo.firstname" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="shortDesclbl" class="col-sm-2 col-form-label">Phone</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" formControlName="phone" name="phone"  [value]="buyerInfo.phone" />
+        </div>
+      </div>
+      -->
+      <div class="form-group row">
+        <label for="detailedDesclbl" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-2">
+          <input type="text" class="form-control" formControlName="emailId"  name="emailId" [value]="buyerInfo.email" />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="categorylbl" class="col-sm-2 col-form-label">Bid Amount</label>
+        <div class="col-sm-2">
+         
+         <input type="text" class="form-control" formControlName="bidPrice" name="bidPrice" [value]="buyerInfo.bidamount" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-secondary" (click)="RemoveBuyer()">Delete</button>
+        <button type="button" class="btn btn-secondary">Clear</button>
+      </div>
+</form>
+<b>Buyer Info:</b>
+<ag-grid-angular 
+  style="width: 700px; height: 300px;"   
+  class="ag-theme-alpine"     
+    [rowData]="rowData"
+    [columnDefs]="columnDefs" 
+    [defaultColDef]="defaultColDef"
+    (cellClicked)="onCellClicked($event)"></ag-grid-angular>

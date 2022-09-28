@@ -13,6 +13,7 @@ import { Product } from '../product';
 export class AddProductComponent implements OnInit {
   categoryList: any = ["Painting", "Sculptor", "Ornament"];
   form: FormGroup = new FormGroup({
+    productId: new FormControl(),
     productname: new FormControl(''),
     shortdescription: new FormControl(''),
     detaileddescription: new FormControl(''),
@@ -35,6 +36,9 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
+        productId: ['', 
+            Validators.required
+        ],
         productname: ['', 
           [
             Validators.required,

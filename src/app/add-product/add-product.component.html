@@ -1,6 +1,19 @@
 <h1>Add Product</h1>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" >
+  <div class="form-group row">
+    <label for="name" class="col-sm-2 col-form-label">Product ID</label>
+    <div class="col-sm-2">
+      <input type="text" formControlName="productId" class="form-control" name="productId" placeholder="Enter Product ID" 
+      [ngClass]="{ 'is-invalid': submitted && f['productId'].errors }" />
+      <div *ngIf="submitted && f['productId'].errors" class="invalid-feedback">
+        <div *ngIf="f['productId'].errors['required']">
+              Product ID is required
+        </div>
+
+      </div>
+    </div>
+  </div>
     <div class="form-group row">
       <label for="name" class="col-sm-2 col-form-label">Product Name</label>
       <div class="col-sm-2">

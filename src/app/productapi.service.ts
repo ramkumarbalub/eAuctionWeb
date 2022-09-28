@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaderResponse, HttpHeaders } from "@angular/common/htt
 import { Observable } from 'rxjs';
 import { Product } from './product';
 import { BuyerModel } from './buyermodel';
+import { JsonPipe } from '@angular/common';
+import { UpdateBidModel } from './UpdateBidModel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,10 @@ export class ProductapiService {
 
   urlbuyer = "https://localhost:44345/api/v1/Buyer/post-buyer";
   urlBidsList = "https://localhost:44345/api/v1/Buyer/listbidsagainstproduct?productid=";
+
+  //https://localhost:44345/api/v1/Buyer/update-bid?productId=prd4&buyerEmailId=test%40gmail.com&newBidAmount=123
+  urlNewBidAmount = "https://localhost:44345/api/v1/Buyer/update-bid";
+  urlRemoveBid = "https://localhost:44345/api/v1/Buyer/delete-bid";
   constructor(
     private http: HttpClient,
     
@@ -37,10 +43,22 @@ public ListAllProductsNameAndId(){
   console.log('ListAllProductsNameAndId - Service');
 return this.http.get(this.url4);
 }
-public saveProduct(data: any): Observable<any> {
+
+public RemoveBid(data: any) : Observable<UpdateBidModel> {
+  //console.log("ProductAPI service - "+this.urlNewBidAmount+"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
+  //Modify the Url
+  return this.http.post<UpdateBidModel>(this.urlRemoveBid, JSON.stringify(data), this.httpOptions).pipe(); //"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
+}
+
+public updateBidAmount(data: any) : Observable<UpdateBidModel> {
+  //console.log("ProductAPI service - "+this.urlNewBidAmount+"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
+  //Modify the Url
+  return this.http.post<UpdateBidModel>(this.urlNewBidAmount, JSON.stringify(data), this.httpOptions).pipe(); //"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
+}
+public saveProduct(data: any): Observable<Product> {
     console.log('service data is ', JSON.stringify(data));
 
-    return this.http.get(this.url3);
+    return this.http.post<Product>(this.url, JSON.stringify(data), this.httpOptions).pipe();
     /*
     return this.http.post(this.url, JSON.stringify({
       "productId": "TV123",
