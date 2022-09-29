@@ -43,7 +43,6 @@ export class UpdateBidComponent implements OnInit {
   ngOnInit(): void {
     //Call API during form load
     //It returns ProductId and ProductName
-
     //Bind this to the Drop-down
     this.productapi.ListAllProductsNameAndId().subscribe((result) => {
       console.log('Product name list -- Begin');
@@ -54,10 +53,7 @@ export class UpdateBidComponent implements OnInit {
   }
 
   onSubmit(): void{
-    //console.log('the updated bid amount is ', this.form.get("bidamount")?.value);
     console.log('the complete value is ', this.form.value);
-    //this.productapi.updateBidAmount(this.form.value);
-
     this.productapi.updateBidAmount(this.form.value).subscribe((result) => {
       console.log('Bid amount updated', result);
      });
@@ -88,8 +84,6 @@ onOptionsSelected(value:string){
   onCellClicked(e: CellClickedEvent): void {
     console.log('cellClicked', e.data);
     this.buyerInfo = e.data;
-    //this.form.controls['firstname'].setValue(this.buyerInfo.firstname);
-    //this.form.controls['phone'].setValue(this.buyerInfo.phone);
     this.form.controls['emailId'].setValue(this.buyerInfo.email);
     this.form.controls['productId'].setValue(this.productidselected);
   }

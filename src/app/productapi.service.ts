@@ -10,24 +10,22 @@ import { UpdateBidModel } from './UpdateBidModel';
   providedIn: 'root'
 })
 export class ProductapiService {
-  url = "https://localhost:44345/api/v1/Seller/post-product";
-  url2 = "https://localhost:44345/api/v1/Seller/getproduct";
-  url3 = "https://localhost:44345/api/v1/Seller/show-bids/prd02";
-  url4 = "https://localhost:44345/api/v1/Seller/listProduct";
-  url5 = "https://localhost:44345/api/v1/Seller/getProductInfo?productId=";
+  urlPostProduct = "https://localhost:44345/api/v1/Seller/post-product";
+  //urlListProduct = "https://localhost:44345/api/v1/Seller/listProduct";
+  urlListProduct = "https://eauctionapiapi.azure-api.net/v1/Seller/ListProductName";
+  urlSelectedProduct = "https://localhost:44345/api/v1/Seller/getProductInfo?productId=";
 
-  urlbuyer = "https://localhost:44345/api/v1/Buyer/post-buyer";
+  urlAddBuyer = "https://localhost:44345/api/v1/Buyer/post-buyer";
   urlBidsList = "https://localhost:44345/api/v1/Buyer/listbidsagainstproduct?productid=";
 
-  //https://localhost:44345/api/v1/Buyer/update-bid?productId=prd4&buyerEmailId=test%40gmail.com&newBidAmount=123
-  urlNewBidAmount = "https://localhost:44345/api/v1/Buyer/update-bid";
-  urlRemoveBid = "https://localhost:44345/api/v1/Buyer/delete-bid";
+  urlUpdateBidAmount = "https://localhost:44345/api/v1/Buyer/update-bid";
+  urlDeleteBuyersBid = "https://localhost:44345/api/v1/Buyer/delete-bid";
   constructor(
     private http: HttpClient,
     
   ) { }
   public getProduct(){
-    return this.http.get(this.url);
+    return this.http.get(this.urlPostProduct);
 }
 
 public getBidsListForAproduct(value: string){
@@ -37,39 +35,24 @@ public getBidsListForAproduct(value: string){
 
 public getProductInfo(value: string){
   console.log('Get Product Info ', value);
-  return this.http.get(this.url5+value);
+  return this.http.get(this.urlSelectedProduct+value);
 }
 public ListAllProductsNameAndId(){
   console.log('ListAllProductsNameAndId - Service');
-return this.http.get(this.url4);
+return this.http.get(this.urlListProduct);
 }
 
+//Remove the bid from buyer
 public RemoveBid(data: any) : Observable<UpdateBidModel> {
-  //console.log("ProductAPI service - "+this.urlNewBidAmount+"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
-  //Modify the Url
-  return this.http.post<UpdateBidModel>(this.urlRemoveBid, JSON.stringify(data), this.httpOptions).pipe(); //"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
+  return this.http.post<UpdateBidModel>(this.urlDeleteBuyersBid, JSON.stringify(data), this.httpOptions).pipe(); //"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
 }
 
+//Update the Buyers Bid amount
 public updateBidAmount(data: any) : Observable<UpdateBidModel> {
-  //console.log("ProductAPI service - "+this.urlNewBidAmount+"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
-  //Modify the Url
-  return this.http.post<UpdateBidModel>(this.urlNewBidAmount, JSON.stringify(data), this.httpOptions).pipe(); //"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
+  return this.http.post<UpdateBidModel>(this.urlUpdateBidAmount, JSON.stringify(data), this.httpOptions).pipe(); //"productId="+ data.productid + "&buyerEmailId=" + data.email +"&newBidAmount="+ data.bidamount);
 }
 public saveProduct(data: any): Observable<Product> {
-    console.log('service data is ', JSON.stringify(data));
-
-    return this.http.post<Product>(this.url, JSON.stringify(data), this.httpOptions).pipe();
-    /*
-    return this.http.post(this.url, JSON.stringify({
-      "productId": "TV123",
-      "productname": "Television",
-      "shortdescription": "Samsung",
-      "detaileddescription": "Samsung 4k Ultra",
-      "category": "string",
-      "startingprice": 0,
-      "bidenddate": "2022-09-13"
-    })).subscribe();
-    */
+    return this.http.post<Product>(this.urlPostProduct, JSON.stringify(data), this.httpOptions).pipe();
 }
 
 httpOptions = {
@@ -79,6 +62,6 @@ httpOptions = {
 }
 
 public saveBuyer(data: any) : Observable<BuyerModel>  {
-return this.http.post<BuyerModel>(this.urlbuyer, JSON.stringify(data), this.httpOptions).pipe();
+return this.http.post<BuyerModel>(this.urlAddBuyer, JSON.stringify(data), this.httpOptions).pipe();
 }
 }

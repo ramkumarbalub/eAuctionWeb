@@ -17,19 +17,6 @@ export class ListBidsComponent implements OnInit {
   productInfo: any = {};
   rowData: any = [];
 
-  productName: string = 'testProd';
-  shortDesc: string = 'SD';
-  detailedDesc: string = 'DD';
-  category: string = 'CAT';
-  startingPrice: any = 5000.00;
-  bidEndDate:any = '01-01-2022';
-  /*
-  productListArray: any = [
-    { "productId" : "prd02", "productName": "Television" },
-    { "productId" : "prd03", "productName": "Refridgerator" },
-    { "productId" : "prd04", "productName": "Sofa" }
-  ]
-  */
   constructor(private formBuilder: FormBuilder, private productapi: ProductapiService) {
     
    }
@@ -50,7 +37,6 @@ export class ListBidsComponent implements OnInit {
   ngOnInit(): void {
     //Call API during form load
     //It returns ProductId and ProductName
-
     //Bind this to the Drop-down
     this.productapi.ListAllProductsNameAndId().subscribe((result) => {
       console.log('Product name list -- Begin');
@@ -82,15 +68,4 @@ export class ListBidsComponent implements OnInit {
   onCellClicked(e: CellClickedEvent): void {
     console.log('cellClicked', e.data.bidamount);
   }
-/*
-  rowData = [
-    { BidAmount: 100, Name: 'ABC', Email: 'ABC.com', Mobile: 998899},
-    { BidAmount: 200, Name: 'DEF', Email: 'DEF.com', Mobile: 9988991},
-    { BidAmount: 300, Name: 'GHI', Email: 'GHI.com', Mobile: 9988991}
-  ]
-*/
-/*
-  rowData = [
-    { "firstname" : "CD elect", "phone" : "12345678", "email" : "12345@gmail.com", "bidamount" : "250000" }];
-*/
 }

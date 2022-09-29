@@ -48,7 +48,9 @@ export class PlaceBidComponent implements OnInit {
         state: ['', Validators.required],
         pin: ['', Validators.required],
         phone: ['', Validators.required],
-        email: ['', Validators.required],
+        email: ['', Validators.required, 
+                Validators.email,
+                Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
         bidamount: ['', Validators.required],
         productid: ['']
 
@@ -63,9 +65,7 @@ export class PlaceBidComponent implements OnInit {
 
   onSubmit(): void{
     console.log('form data is : ', this.form.value);
-    //console.log('productid2 - ', this.productid2);
     this.submitted = true;
-    //this.form.controls['productid1'].setValue(this.productid2);
     this.productapi.saveBuyer(this.form.value).subscribe((result) => {
       console.log('Buyer response received', result);
      });
