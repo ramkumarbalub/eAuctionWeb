@@ -10,16 +10,30 @@ import { UpdateBidModel } from './UpdateBidModel';
   providedIn: 'root'
 })
 export class ProductapiService {
-  urlPostProduct = "https://localhost:44345/api/v1/Seller/post-product";
-  //urlListProduct = "https://localhost:44345/api/v1/Seller/listProduct";
+  urlPostProduct = "https://eauctionapiapi.azure-api.net/v1/Seller/Post";
+  //https://localhost:44345/api/v1/Seller/post-product
+
   urlListProduct = "https://eauctionapiapi.azure-api.net/v1/Seller/ListProductName";
-  urlSelectedProduct = "https://localhost:44345/api/v1/Seller/getProductInfo?productId=";
+  //https://localhost:44345/api/v1/Seller/listProduct
 
-  urlAddBuyer = "https://localhost:44345/api/v1/Buyer/post-buyer";
-  urlBidsList = "https://localhost:44345/api/v1/Buyer/listbidsagainstproduct?productid=";
+  urlSelectedProduct = "https://eauctionapiapi.azure-api.net/v1/Seller/GetProductInfo?productId=";
+  //https://localhost:44345/api/v1/Seller/getProductInfo?productId=
 
-  urlUpdateBidAmount = "https://localhost:44345/api/v1/Buyer/update-bid";
-  urlDeleteBuyersBid = "https://localhost:44345/api/v1/Buyer/delete-bid";
+
+  urlAddBuyer = "https://eauctionapiapi.azure-api.net/v1/Buyer/PostBuyer";
+  //https://localhost:44345/api/v1/Buyer/post-buyer
+
+  urlBidsList = "https://eauctionapiapi.azure-api.net/v1/Buyer/ListBidsAgainstProduct?productid=";
+  //https://localhost:44345/api/v1/Buyer/listbidsagainstproduct?productid=
+
+
+  urlUpdateBidAmount = "https://eauctionapiapi.azure-api.net/v1/Buyer/UpdateBid";
+  //https://localhost:44345/api/v1/Buyer/update-bid
+
+  urlDeleteBuyersBid = "https://eauctionapiapi.azure-api.net/v1/Buyer/DeleteBuyerBid";
+  //https://localhost:44345/api/v1/Buyer/delete-bid
+
+
   constructor(
     private http: HttpClient,
     

@@ -9,6 +9,7 @@ import { ProductapiService } from '../productapi.service';
   providers: [ProductapiService]
 })
 export class PlaceBidComponent implements OnInit {
+  alert1: boolean = false;
   productListArray: any = [];
   productid2: string = '';
   form: FormGroup = new FormGroup({
@@ -36,7 +37,7 @@ export class PlaceBidComponent implements OnInit {
       console.log('Product name list -- Begin');
       console.log(result);
       this.productListArray = result;
-      console.log('Product name list -- end');
+      console.log('Product name list -- end');     
     });
 
     this.form = this.formBuilder.group(
@@ -66,17 +67,26 @@ export class PlaceBidComponent implements OnInit {
   onSubmit(): void{
     console.log('form data is : ', this.form.value);
     this.submitted = true;
-    this.productapi.saveBuyer(this.form.value).subscribe((result) => {
-      console.log('Buyer response received', result);
-     });
 
     if (this.form.invalid){
       return;
     }
+
+    this.productapi.saveBuyer(this.form.value).subscribe((result) => {
+      console.log('Buyer response received', result);
+      this.alert1 = true;
+      this.form.reset({});
+      this.submitted = false;
+     });
+
+    
   }
 
   get f(): { [key: string]: AbstractControl }{
     return this.form.controls;
   }
 
+  closeAlert(){
+    this.alert1 = false;
+  }
 }

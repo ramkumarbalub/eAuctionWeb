@@ -1,5 +1,11 @@
-<h1>Add Product</h1>
+<h1>Add New Product</h1>
 
+<div *ngIf="alert" class="alert alert-success alert-dismissible fade show" role="alert">
+  <strong>Success !</strong> You product has been entered successfully.
+  <button (click)="closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()" >
   <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">Product ID</label>

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { ProductapiService } from '../productapi.service';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CellClickedEvent, ColDef } from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridOptionsWrapper } from 'ag-grid-community';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,6 +12,11 @@ import { Observable } from 'rxjs';
   providers: [ProductapiService]
 })
 export class UpdateBidComponent implements OnInit {
+
+  alertUpdate: boolean = false;
+  alertDelete: boolean = false;
+  alertZeroRecords: boolean = false;
+
   productListArray: any = [];
   rowData: any = [];
   buyerInfo: any = {};
@@ -56,6 +61,20 @@ export class UpdateBidComponent implements OnInit {
     console.log('the complete value is ', this.form.value);
     this.productapi.updateBidAmount(this.form.value).subscribe((result) => {
       console.log('Bid amount updated', result);
+
+      this.alertUpdate = true;
+      this.form.reset({});
+      this.LoadGrid();
+      /*
+      this.productapi.getBidsListForAproduct(this.productidselected).subscribe((result2) =>
+      {
+        console.log('Revised BidsInfo -- Begin');
+        console.log(result2); 
+        this.rowData = result2;
+        
+        console.log('Revised BidsInfo -- end');
+      });
+      */
      });
   }
 
@@ -63,15 +82,49 @@ export class UpdateBidComponent implements OnInit {
     console.log('the remove value is ', this.form.value);
     this.productapi.RemoveBid(this.form.value).subscribe((result) => {
       console.log('Bid removed from auction', result);
-     });
 
+      this.alertDelete = true;
+      this.form.reset({});
+
+      this.LoadGrid();
+      /*
+      this.productapi.getBidsListForAproduct(this.productidselected).subscribe((result2) =>
+      {
+        console.log('Revised BidsInfo -- Begin');
+        console.log(result2); 
+        this.rowData = result2;
+        
+        console.log('Revised BidsInfo -- end');
+      });
+      */
+    });
+
+  }
+
+  LoadGrid(){
+    this.productapi.getBidsListForAproduct(this.productidselected).subscribe((result2) =>
+      {
+        console.log('Revised BidsInfo -- Begin');
+        console.log(result2); 
+        this.rowData = result2;
+        
+        //console.log('Length is ', this.rowData.length);
+       
+        console.log('Revised BidsInfo -- end');
+      });
   }
 
 onOptionsSelected(value:string){
     console.log('the selected value is ', value);
 
     this.productidselected = value;
+    this.LoadGrid();
 
+    if(this.rowData.length == 0){
+      this.alertZeroRecords = true;
+    }
+
+    /*
     this.productapi.getBidsListForAproduct(value).subscribe((result1) =>
     {
       console.log('Get BidsInfo -- Begin');
@@ -79,6 +132,7 @@ onOptionsSelected(value:string){
       this.rowData = result1;
       console.log('Get BidsInfo -- end');
     });
+    */
   }
   
   onCellClicked(e: CellClickedEvent): void {
@@ -86,5 +140,11 @@ onOptionsSelected(value:string){
     this.buyerInfo = e.data;
     this.form.controls['emailId'].setValue(this.buyerInfo.email);
     this.form.controls['productId'].setValue(this.productidselected);
+  }
+
+  closeAlert(){
+    this.alertUpdate = false;
+    this.alertDelete = false;
+    this.alertZeroRecords = false;
   }
 }

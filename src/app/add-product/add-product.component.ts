@@ -11,6 +11,7 @@ import { Product } from '../product';
   providers: [ProductapiService]
 })
 export class AddProductComponent implements OnInit {
+  alert: boolean = false;
   categoryList: any = ["Painting", "Sculptor", "Ornament"];
   form: FormGroup = new FormGroup({
     productId: new FormControl(),
@@ -67,16 +68,22 @@ export class AddProductComponent implements OnInit {
     this.submitted = true;
     const productm: Product = { productId: "", productname:"", shortdescription: "", detaileddescription: "", category: "", startingprice:"0.00", bidenddate:"2022-09-12" };
     //const e = { ...this.productm, ...this.form.value};
-    this.productapi.saveProduct(this.form.value).subscribe((result) => {
-      console.log('response received');
-      console.log(result);
-     });
     if (this.form.invalid){
       return;
     }
+    this.productapi.saveProduct(this.form.value).subscribe((result) => {
+      console.log('response received');
+      console.log(result);      
+      this.alert = true;
+      this.form.reset({});
+      this.submitted = false;
+     });
+    
   }
   get f(): { [key: string]: AbstractControl }{
     return this.form.controls;
   }
-
+  closeAlert(){
+    this.alert = false;
+  }
 }
