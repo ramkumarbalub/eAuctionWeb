@@ -65,16 +65,7 @@ export class UpdateBidComponent implements OnInit {
       this.alertUpdate = true;
       this.form.reset({});
       this.LoadGrid();
-      /*
-      this.productapi.getBidsListForAproduct(this.productidselected).subscribe((result2) =>
-      {
-        console.log('Revised BidsInfo -- Begin');
-        console.log(result2); 
-        this.rowData = result2;
-        
-        console.log('Revised BidsInfo -- end');
-      });
-      */
+      
      });
   }
 
@@ -87,16 +78,7 @@ export class UpdateBidComponent implements OnInit {
       this.form.reset({});
 
       this.LoadGrid();
-      /*
-      this.productapi.getBidsListForAproduct(this.productidselected).subscribe((result2) =>
-      {
-        console.log('Revised BidsInfo -- Begin');
-        console.log(result2); 
-        this.rowData = result2;
-        
-        console.log('Revised BidsInfo -- end');
-      });
-      */
+      
     });
 
   }
@@ -108,8 +90,6 @@ export class UpdateBidComponent implements OnInit {
         console.log(result2); 
         this.rowData = result2;
         
-        //console.log('Length is ', this.rowData.length);
-       
         console.log('Revised BidsInfo -- end');
       });
   }
@@ -124,15 +104,6 @@ onOptionsSelected(value:string){
       this.alertZeroRecords = true;
     }
 
-    /*
-    this.productapi.getBidsListForAproduct(value).subscribe((result1) =>
-    {
-      console.log('Get BidsInfo -- Begin');
-      console.log(result1); 
-      this.rowData = result1;
-      console.log('Get BidsInfo -- end');
-    });
-    */
   }
   
   onCellClicked(e: CellClickedEvent): void {
